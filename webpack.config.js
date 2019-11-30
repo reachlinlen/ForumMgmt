@@ -1,6 +1,6 @@
-const webpack = require('webpack')
-const HtmlWebPackPlugin = require("html-webpack-plugin")
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const webpack = require('webpack');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env, argv) => ({
   module: {
@@ -8,46 +8,46 @@ module.exports = (env, argv) => ({
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader']
+        use: ['babel-loader', 'eslint-loader'],
       },
       {
         test: /\.html$/,
         use: [{
-          loader: "html-loader",
-          options: { minimize: true }
-        }]
+          loader: 'html-loader',
+          options: { minimize: true },
+        }],
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"]
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: /\.svg$/,
         loader: 'svg-inline-loader',
         options: {
-          jsx: true
-        }
-      }
+          jsx: true,
+        },
+      },
     ],
   },
   resolve: {
-    extensions: ['*', '.js', '.jsx']
+    extensions: ['*', '.js', '.jsx'],
   },
   plugins: [
     new HtmlWebPackPlugin({
       template: './src/index.html',
-      filename: './index.html'
+      filename: './index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css"
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify("development")
-    })
+      'process.env.NODE_ENV': JSON.stringify('development'),
+    }),
   ],
-  devtool: argv.mode === "production" ? "" : "source-map",
+  devtool: argv.mode === 'production' ? '' : 'source-map',
   devServer: {
     historyApiFallback: true,
-  }
+  },
 });

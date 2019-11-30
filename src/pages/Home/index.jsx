@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Home(props) {
+function Home() {
   const classes = useStyles();
   return (
     <>
