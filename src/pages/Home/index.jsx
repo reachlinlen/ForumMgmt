@@ -3,6 +3,7 @@ import {
   Grid, Button, Typography, Hidden, TextField, Icon,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import Recaptcha from 'react-recaptcha';
 
 import google from '../../assets/images/Google_Plus_icon.svg';
 // import useStyles from './styles';
@@ -10,6 +11,9 @@ import Color from '../../Color';
 
 const useStyles = makeStyles((theme) => ({
   pageContainer: {
+    maxWidth: '70%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     margin: theme.spacing(8),
     padding: theme.spacing(6),
   },
@@ -27,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   orText: {
     borderRadius: '50%',
-    maxWidth: '33%',
+    maxWidth: '47%',
     marginLeft: 'auto',
     marginRight: 'auto',
     background: Color.border,
@@ -39,10 +43,10 @@ const useStyles = makeStyles((theme) => ({
   hostLogin: {
     paddingLeft: theme.spacing(4),
     '& .MuiFormControl-root.MuiTextField-root': {
-      width: '60%',
+      width: '100%',
     },
     '& .MuiButton-containedSecondary': {
-      width: '60%',
+      width: '100%',
     },
   },
 }));
@@ -81,6 +85,13 @@ function Home() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField placeholder="Password" />
+                </Grid>
+                <Grid item xs={12}>
+                  <Recaptcha
+                    sitekey="6LdLa8UUAAAAAE1R9Oj8di7isusc610wLDUe6D2B"
+                    render="explicit"
+                    theme="dark"
+                  />
                 </Grid>
                 <Grid item xs={12}>
                   <Button variant="contained" color="secondary">
