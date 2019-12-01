@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Grid, Button, Typography, Hidden, TextField, Icon,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import Recaptcha from 'react-recaptcha';
 
 import google from '../../assets/images/Google_Plus_icon.svg';
 // import useStyles from './styles';
@@ -53,6 +52,23 @@ const useStyles = makeStyles((theme) => ({
 
 function Home() {
   const classes = useStyles();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    grecaptcha.ready(function() {
+      grecaptcha.execute('6LemdMUUAAAAAL6YanSVVocTS4bAotgl_IuqLGwr', {action: 'homepage'}).then(function(token) {
+         console.log('token:',token);
+      });
+    });
+  };
+  const handleUserNameChange = (e) => null;
+  const handlePasswordChange = (e) => null;
+  // useEffect(() => {
+  //   grecaptcha.ready(function() {
+  //     grecaptcha.execute('', {action: 'homepage'}).then(function(token) {
+  //        console.log(token);
+  //     });
+  // })});
+
   return (
     <>
       <Grid container spacing={2} className={classes.pageContainer}>
@@ -79,26 +95,36 @@ function Home() {
               </Grid>
             </Hidden>
             <Grid item xs={12} lg={5}>
-              <Grid container spacing={3} className={classes.hostLogin}>
-                <Grid item xs={12}>
-                  <TextField placeholder="Username" />
+              <form onSubmit={handleSubmit}>
+                <Grid container spacing={5} className={classes.hostLogin}>
+                  <Grid item xs={12}>
+                    <TextField
+                      type="text"
+                      placeholder="Username"
+                      helperText=""
+                      onChange={handleUserNameChange}
+                      required
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextField
+                      placeholder="Password"
+                      onChange={handlePasswordChange}
+                      required
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <div
+                      className="g-recaptcha"
+                      data-sitekey="6LemdMUUAAAAAL6YanSVVocTS4bAotgl_IuqLGwr"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <input type="submit" value="Login" />
+                    {/* <Button variant="contained" fullWidth>Login</Button> */}
+                  </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                  <TextField placeholder="Password" />
-                </Grid>
-                <Grid item xs={12}>
-                  <Recaptcha
-                    sitekey="6LdLa8UUAAAAAE1R9Oj8di7isusc610wLDUe6D2B"
-                    render="explicit"
-                    theme="dark"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Button variant="contained" color="secondary">
-                    Login
-                  </Button>
-                </Grid>
-              </Grid>
+              </form>
             </Grid>
           </Grid>
         </Grid>
