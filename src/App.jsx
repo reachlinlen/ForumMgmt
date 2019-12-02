@@ -1,16 +1,33 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import Login from './pages/Login';
 import Forums from './pages/Forums';
+import Science from './pages/Science';
+import Technology from './pages/Technology';
+import Sports from './pages/Sports';
+import AppBar from './components/AppBar';
 
-function App() {
+function App(props) {
+  const { location } = props;
+  const isLogin = location.pathname === '/';
   return (
-    <Switch>
-      <Route path="/" exact component={Login} />
-      <Route path="/forums" exact component={Forums} />
-    </Switch>
+    <>
+      { !isLogin && <AppBar />}
+      <Switch>
+        <Route path="/" exact component={Login} />
+        <Route path="/forums" exact component={Forums} />
+        <Route path="/science" exact component={Science} />
+        <Route path="/Technology" exact component={Technology} />
+        <Route path="/Sports" exact component={Sports} />
+      </Switch>
+    </>
   );
 }
 
-export default App;
+App.propTypes = {
+  location: PropTypes.instanceOf(Object).isRequired,
+};
+
+export default withRouter(App);
