@@ -47,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
     },
   },
+  loginText: {
+    height: '12vh',
+  },
 }));
 
 function Home() {
@@ -90,19 +93,20 @@ function Home() {
             <Grid item xs={12} lg={5}>
               <form onSubmit={handleSubmit}>
                 <Grid container spacing={5} className={classes.hostLogin}>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} className={classes.loginText}>
                     <TextField
                       type="text"
                       placeholder="Username"
-                      helperText=""
+                      helperText="Hello"
                       onChange={handleUserNameChange}
                       required
                     />
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} className={classes.loginText}>
                     <TextField
                       placeholder="Password"
                       onChange={handlePasswordChange}
+                      helperText="Minimum 8 characers with one Special character, one Number."
                       required
                     />
                   </Grid>
