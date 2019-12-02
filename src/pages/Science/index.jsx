@@ -4,19 +4,21 @@ import ForumLayout from '../../components/ForumLayout';
 import { getTopics } from '../../api';
 
 function Forums() {
-  const [topics, setTopics] = useState([]);
+  const [topics, setTopics] = useState('');
   useEffect(() => {
-    async function fetchData() {
+    async function fetchTopics() {
       const resp = await getTopics('Science');
       if (resp) {
         setTopics(resp);
       }
     }
-    fetchData();
+    fetchTopics();
   }, []);
 
   return (
-    <ForumLayout topics={topics} />
+    <>
+      { topics && <ForumLayout topics={topics} subject="Science" /> }
+    </>
   );
 }
 

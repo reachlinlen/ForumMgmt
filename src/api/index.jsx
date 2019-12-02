@@ -14,12 +14,10 @@ const HEADERS = {
 
 export const getTopics = async (subject) => {
   const resp = await axios.get(`${URL}/topics?subject=${subject}`);
-  if (Array.isArray(resp.data)) {
-    return resp.data;
-  }
-  throw resp;
+  return resp.data;
 };
 
-export const addTopics = (subject) => {
-  console.log(subject);
+export const getTopicContent = async (subject, topicId) => {
+  const resp = await axios.get(`${URL}/topicdata?subject=${subject}&&topicId=${topicId}`);
+  return resp.data;
 };
