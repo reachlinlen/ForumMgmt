@@ -13,7 +13,6 @@ const HEADERS = {
 };
 
 export const getTopics = async (subject) => {
-  // await axios.get(`${URL}/topics?subject=${subject}`, { headers: HEADERS })
   const resp = await axios.get(`${URL}/topics?subject=${subject}`);
   if (Array.isArray(resp.data)) {
     return resp.data;

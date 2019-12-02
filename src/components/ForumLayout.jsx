@@ -24,7 +24,6 @@ function ForumLayout(props) {
   const { topics } = props;
   const classes = useStyles();
   // const topicList = ['A', 'B', 'C'];
-  console.log(topics)
   return (
     <Grid container className={classes.forumContainer}>
       <Grid item xs={12}>

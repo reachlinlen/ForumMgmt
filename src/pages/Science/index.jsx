@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { get } from 'lodash';
 
 import ForumLayout from '../../components/ForumLayout';
 import { getTopics } from '../../api';
@@ -10,7 +9,6 @@ function Forums() {
     async function fetchData() {
       const resp = await getTopics('Science');
       if (resp) {
-        console.log('resp', resp);
         setTopics(resp);
       }
     }
