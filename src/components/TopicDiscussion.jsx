@@ -8,6 +8,14 @@ import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import CommentIcon from '@material-ui/icons/Comment';
 
 const useStyles = makeStyles((theme) => ({
+  discussion: {
+    [theme.breakpoints.down('md')]: {
+      paddingTop: '2vh',
+    },
+    [theme.breakpoints.up('lg')]: {
+      paddingLeft: '2vw',
+    },
+  },
   divider: {
     maxWidth: '60%',
     padding: theme.spacing(2, 0),
@@ -35,7 +43,7 @@ function TopicDiscussion(props) {
 
   return (
     <>
-      <Grid container>
+      <Grid container className={classes.discussion}>
         <Grid item xs={12}>
           <Typography variant="h4" gutterBottom>
             {title}

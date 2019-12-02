@@ -13,13 +13,25 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '70%',
     marginLeft: 'auto',
     marginRight: 'auto',
+    [theme.breakpoints.down('md')]: {
+      paddingTop: '2vh',
+      paddingLeft: '1vw',
+    },
   },
   topics: {
-    paddingInlineStart: '0',
+    [theme.breakpoints.up('lg')]: {
+      paddingInlineStart: '0',
+    },
   },
   list: {
-    borderRight: `${theme.spacing(1)}px solid ${Color.border}`,
-    height: '90vh',
+    [theme.breakpoints.up('lg')]: {
+      borderRight: `${theme.spacing(1)}px solid ${Color.border}`,
+      height: '90vh',
+    },
+    [theme.breakpoints.down('md')]: {
+      borderBottom: `${theme.spacing(1)}px solid ${Color.border}`,
+      width: '90vw',
+    },
   },
 }));
 
@@ -37,7 +49,7 @@ function ForumLayout(props) {
     async function fetchTopicContent() {
       const resp = await getTopicContent(subject, selTopic);
       if (resp) {
-        setTopicContent(resp);
+        setTopicContent(resp[0]);
       }
     }
     fetchTopicContent();
@@ -66,7 +78,17 @@ function ForumLayout(props) {
         </ul>
       </Grid>
       <Grid item xs={12} lg={9}>
-        <ul className={classes.topics}>
+        {
+          topicContent
+          && (
+            <TopicDiscussion
+              content={topicContent.topic_content}
+              title={topicContent.topic}
+              comments={topicContent.comments}
+            />
+          )
+        }
+        {/* <ul className={classes.content}>
           {
             topicContent
             && topicContent.map((item) => (
@@ -77,7 +99,7 @@ function ForumLayout(props) {
               </ul>
             ))
           }
-        </ul>
+        </ul> */}
       </Grid>
     </Grid>
   );
