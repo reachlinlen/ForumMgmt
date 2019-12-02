@@ -7,14 +7,14 @@ import Forums from './pages/Forums';
 import Science from './pages/Science';
 import Technology from './pages/Technology';
 import Sports from './pages/Sports';
-import AppBar from './components/AppBar';
+import ForumAppBar from './components/ForumAppBar';
 
 function App(props) {
   const { location } = props;
   const isLogin = location.pathname === '/';
   return (
     <>
-      { !isLogin && <AppBar />}
+      { !isLogin && <ForumAppBar />}
       <Switch>
         <Route path="/" exact component={Login} />
         <Route path="/forums" exact component={Forums} />

@@ -3,6 +3,11 @@ import {
   AppBar, Tabs, Tab, Grid,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router-dom';
+
+import PropTypes from 'prop-types';
+
+import { DEFAULT_PAGE, PAGE_INDEX } from '../constants';
 
 const useStyles = makeStyles((theme) => ({
   forumContainer: {
@@ -12,13 +17,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Forums() {
+function ForumAppBar(props) {
+  const { history } = props;
   const classes = useStyles();
-  const [value, setValue] = useState('Science');
+  const currentPage = PAGE_INDEX[DEFAULT_PAGE];
   return (
     <Grid container className={classes.forumContainer}>
       <AppBar position="static">
-        <Tabs value={value} onChange={(e, newVal) => setValue(newVal)}>
+        <Tabs value={currentPage} onChange={(e, newVal) => history.push(newVal)}>
+          <Tab label="Forums" />
           <Tab label="Science" />
           <Tab label="Technology" />
           <Tab label="Sports" />
@@ -28,4 +35,8 @@ function Forums() {
   );
 }
 
-export default Forums;
+ForumAppBar.propTypes = {
+  history: PropTypes.instanceOf(Object).isRequired,
+};
+
+export default withRouter(ForumAppBar);
