@@ -13,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '70%',
     marginLeft: 'auto',
     marginRight: 'auto',
+    paddingTop: '2vh',
     [theme.breakpoints.down('md')]: {
-      paddingTop: '2vh',
       paddingLeft: '1vw',
     },
   },
