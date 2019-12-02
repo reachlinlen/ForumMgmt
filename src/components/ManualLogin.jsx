@@ -15,15 +15,30 @@ const { USERNAME, PASSWORD } = HELPER_TEXT;
 const useStyles = makeStyles((theme) => ({
   hostLogin: {
     paddingLeft: theme.spacing(4),
-    '& .MuiFormControl-root.MuiTextField-root': {
-      width: '100%',
+    [theme.breakpoints.up('lg')]: {
+      '& .MuiFormControl-root.MuiTextField-root': {
+        width: '100%',
+      },
+      '& .MuiButton-containedSecondary': {
+        width: '100%',
+      },
     },
-    '& .MuiButton-containedSecondary': {
-      width: '100%',
+    [theme.breakpoints.down('md')]: {
+      '& .MuiFormControl-root.MuiTextField-root': {
+        width: '38%',
+      },
+      '& .MuiButton-containedSecondary': {
+        width: '30%',
+      },
     },
   },
   loginText: {
-    height: '12vh',
+    [theme.breakpoints.up('lg')]: {
+      height: '12vh',
+    },
+    [theme.breakpoints.down('md')]: {
+      width: '30%',
+    },
   },
 }));
 
@@ -47,7 +62,7 @@ function ManualLogin() {
           const { values, handleChange } = props;
           return (
             <form onSubmit={handleSubmit}>
-              <Grid container spacing={5} className={classes.hostLogin}>
+              <Grid container spacing={2} className={classes.hostLogin}>
                 <Grid item xs={12} className={classes.loginText}>
                   <TextField
                     type="text"

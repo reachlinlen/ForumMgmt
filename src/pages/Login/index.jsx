@@ -16,9 +16,17 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(8),
     padding: theme.spacing(6),
   },
+  loginContainer: {
+    [theme.breakpoints.up('lg')]: {
+      paddingLeft: '2vw',
+    },
+    [theme.breakpoints.down('md')]: {
+      paddingTop: theme.spacing(3),
+    },
+  },
   logo: {
     [theme.breakpoints.up('lg')]: {
-      borderRight: `${theme.spacing(1)}px solid ${Color.border}`,
+      height: '30%',
     },
     [theme.breakpoints.down('md')]: {
       border: `${theme.spacing(1)}px solid ${Color.border}`,
@@ -38,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
       paddingTop: theme.spacing(5),
     },
     [theme.breakpoints.down('md')]: {
-      paddingTop: theme.spacing(5),
+      padding: theme.spacing(5, 0),
       paddingLeft: '25%',
     },
   },
@@ -52,14 +60,6 @@ const useStyles = makeStyles((theme) => ({
       textAlign: 'center',
     },
   },
-  loginContainer: {
-    [theme.breakpoints.up('lg')]: {
-      paddingLeft: theme.spacing(3),
-    },
-    [theme.breakpoints.down('md')]: {
-      paddingTop: theme.spacing(3),
-    },
-  },
 }));
 
 function Home() {
@@ -68,10 +68,10 @@ function Home() {
   return (
     <>
       <Grid container className={classes.pageContainer}>
-        <Grid item xs={5} lg={3} className={classes.logo}>
+        <Grid item xs={5} lg={12} className={classes.logo}>
           <img src="src/assets/images/O.png" alt="OOLogo" />
         </Grid>
-        <Grid item xs={12} lg={8}>
+        <Grid item xs={12} lg={9}>
           <Grid container className={classes.loginContainer}>
             <Grid item xs={12}>
               <Typography variant="h4" className={classes.login}>
@@ -97,7 +97,7 @@ function Home() {
                 </Typography>
               </Grid>
             </Hidden>
-            <Grid item xs={12} lg={5}>
+            <Grid item xs={12} lg={6}>
               <ManualLogin />
             </Grid>
           </Grid>
