@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import google from '../../assets/images/Google_Plus_icon.svg';
 import Color from '../../Color';
+import ManualLogin from '../../components/ManualLogin';
 
 const useStyles = makeStyles((theme) => ({
   pageContainer: {
@@ -38,32 +39,10 @@ const useStyles = makeStyles((theme) => ({
   loginContainer: {
     paddingLeft: theme.spacing(3),
   },
-  hostLogin: {
-    paddingLeft: theme.spacing(4),
-    '& .MuiFormControl-root.MuiTextField-root': {
-      width: '100%',
-    },
-    '& .MuiButton-containedSecondary': {
-      width: '100%',
-    },
-  },
-  loginText: {
-    height: '12vh',
-  },
 }));
 
 function Home() {
   const classes = useStyles();
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    grecaptcha.ready(function() {
-      grecaptcha.execute('6LemdMUUAAAAAL6YanSVVocTS4bAotgl_IuqLGwr', {action: 'homepage'}).then(function(token) {
-         console.log('token:',token);
-      });
-    });
-  };
-  const handleUserNameChange = (e) => null;
-  const handlePasswordChange = (e) => null;
 
   return (
     <>
@@ -91,37 +70,7 @@ function Home() {
               </Grid>
             </Hidden>
             <Grid item xs={12} lg={5}>
-              <form onSubmit={handleSubmit}>
-                <Grid container spacing={5} className={classes.hostLogin}>
-                  <Grid item xs={12} className={classes.loginText}>
-                    <TextField
-                      type="text"
-                      placeholder="Username"
-                      helperText="Hello"
-                      onChange={handleUserNameChange}
-                      required
-                    />
-                  </Grid>
-                  <Grid item xs={12} className={classes.loginText}>
-                    <TextField
-                      placeholder="Password"
-                      onChange={handlePasswordChange}
-                      helperText="Minimum 8 characers with one Special character, one Number."
-                      required
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <div
-                      className="g-recaptcha"
-                      data-sitekey="6LemdMUUAAAAAL6YanSVVocTS4bAotgl_IuqLGwr"
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <input type="submit" value="Login" />
-                    {/* <Button variant="contained" fullWidth>Login</Button> */}
-                  </Grid>
-                </Grid>
-              </form>
+              <ManualLogin />
             </Grid>
           </Grid>
         </Grid>
