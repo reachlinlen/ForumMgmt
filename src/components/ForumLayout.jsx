@@ -85,21 +85,11 @@ function ForumLayout(props) {
               content={topicContent.topic_content}
               title={topicContent.topic}
               comments={topicContent.comments}
+              topicId={topicContent.topic_id}
+              subject={subject}
             />
           )
         }
-        {/* <ul className={classes.content}>
-          {
-            topicContent
-            && topicContent.map((item) => (
-              <ul key={item.topic_id}>
-                <Typography variation="caption" display="block" gutterBottom>
-                  <TopicDiscussion content={item.topic_content} title={item.topic} comments={item.comments} />
-                </Typography>
-              </ul>
-            ))
-          }
-        </ul> */}
       </Grid>
     </Grid>
   );

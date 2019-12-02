@@ -6,6 +6,7 @@ import {
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import CommentIcon from '@material-ui/icons/Comment';
+import { storeNewComment } from '../api';
 
 const useStyles = makeStyles((theme) => ({
   discussion: {
@@ -34,12 +35,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function TopicDiscussion(props) {
-  const { title, content, comments } = props;
+  const {
+    title, content, comments, topicId, subject,
+  } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [addComment, setAddComment] = useState(false);
 
   const handleComment = () => setAddComment(true);
+  const handleSubmit = () => {
+    async function storeComment() {
+      const resp = await storeNewComment(topicId, subject, [...comments, { name: 'lenin', msg: 'Yes.It is the future' }]);
+      setAddComment(false);
+    }
+    storeComment();
+  };
 
   return (
     <>
@@ -106,7 +116,7 @@ function TopicDiscussion(props) {
                   </ThemeProvider>
                 </Grid>
                 <Grid item xs={2}>
-                  <Button variant="contained" color="primary" onClick={() => setAddComment(false)}>
+                  <Button variant="contained" color="primary" onClick={handleSubmit}>
                     Submit
                   </Button>
                 </Grid>
@@ -125,6 +135,8 @@ function TopicDiscussion(props) {
 }
 
 TopicDiscussion.propTypes = {
+  topicId: PropTypes.string.isRequired,
+  subject: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
   comments: PropTypes.arrayOf(PropTypes.shape({

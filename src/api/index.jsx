@@ -21,3 +21,8 @@ export const getTopicContent = async (subject, topicId) => {
   const resp = await axios.get(`${URL}/topicdata?subject=${subject}&&topicId=${topicId}`);
   return resp.data;
 };
+
+export const storeNewComment = async (topicId, subject, comments) => {
+  const resp = await axios.put(`${URL}/addcomment?topicId=${topicId}&&subject=${subject}`, { body: comments });
+  console.log(resp);
+};
