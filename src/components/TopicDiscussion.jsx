@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Grid, Typography, Divider, makeStyles, ThemeProvider, TextField, useTheme, Button,
+  Grid, Typography, Divider, makeStyles, ThemeProvider, TextField, useTheme, Button, Fab,
 } from '@material-ui/core';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2, 0),
   },
   icons: {
-    margin: theme.spacing(0, 2),
+    margin: theme.spacing(2, 2),
   },
   commentText: {
     marginTop: theme.spacing(2),
@@ -50,8 +50,12 @@ function TopicDiscussion(props) {
           <Divider />
         </Grid>
         <Grid item xs={12}>
-          <ThumbUpIcon className={classes.icons} />
-          <ThumbDownIcon className={classes.icons} />
+          <Fab color="primary" className={classes.icons}>
+            <ThumbUpIcon />
+          </Fab>
+          <Fab color="primary" className={classes.icons}>
+            <ThumbDownIcon />
+          </Fab>
         </Grid>
         <Grid item xs={12} className={classes.commentText}>
           <Typography variant="h6" gutterBottom color="textSecondary">
