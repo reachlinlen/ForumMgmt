@@ -1,7 +1,8 @@
-export const DEFAULT_PAGE = 'Forums';
+export const DEFAULT_PAGE = 0;
 
 export const PAGE_INDEX = {
-  Forums: 0,
+  0: 'forums',
+  1: 'science',
 };
 
 export const HELPER_TEXT = {

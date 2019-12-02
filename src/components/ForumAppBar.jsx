@@ -20,11 +20,14 @@ const useStyles = makeStyles(() => ({
 function ForumAppBar(props) {
   const { history } = props;
   const classes = useStyles();
-  const currentPage = PAGE_INDEX[DEFAULT_PAGE];
+  const currentPage = DEFAULT_PAGE;
   return (
     <Grid container className={classes.forumContainer}>
       <AppBar position="static">
-        <Tabs value={currentPage} onChange={(e, newVal) => history.push(newVal)}>
+        <Tabs
+          value={currentPage}
+          onChange={(e, indexPage) => history.push(PAGE_INDEX[indexPage])}
+        >
           <Tab label="Forums" />
           <Tab label="Science" />
           <Tab label="Technology" />
