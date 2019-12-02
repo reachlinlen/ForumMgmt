@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Grid, Button, Typography, Hidden, TextField, Icon,
+  Grid, Button, Typography, Hidden, Icon,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
