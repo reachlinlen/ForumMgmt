@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   Grid, Button, Typography, Hidden, TextField, Icon,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import google from '../../assets/images/Google_Plus_icon.svg';
-// import useStyles from './styles';
 import Color from '../../Color';
 
 const useStyles = makeStyles((theme) => ({
@@ -62,12 +61,6 @@ function Home() {
   };
   const handleUserNameChange = (e) => null;
   const handlePasswordChange = (e) => null;
-  // useEffect(() => {
-  //   grecaptcha.ready(function() {
-  //     grecaptcha.execute('', {action: 'homepage'}).then(function(token) {
-  //        console.log(token);
-  //     });
-  // })});
 
   return (
     <>
