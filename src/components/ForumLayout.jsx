@@ -5,6 +5,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Color from '../Color';
 
 const useStyles = makeStyles((theme) => ({
+  forumContainer: {
+    maxWidth: '70%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
   topics: {
     paddingInlineStart: '0',
   },
@@ -13,12 +18,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ForumLayout(props) {
+function ForumLayout() {
   const classes = useStyles();
   // const { topicList } = props;
   const topicList = ['A', 'B', 'C'];
   return (
-    <Grid container>
+    <Grid container className={classes.forumContainer}>
       <Grid item xs={12}>
         <Typography variant="h4" gutterBottom>Topics</Typography>
       </Grid>
