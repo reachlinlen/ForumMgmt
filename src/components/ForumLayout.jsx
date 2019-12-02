@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 
 import Color from '../Color';
 
@@ -15,13 +16,15 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     borderRight: `${theme.spacing(1)}px solid ${Color.border}`,
+    height: '90vh',
   },
 }));
 
-function ForumLayout() {
+function ForumLayout(props) {
+  const { topics } = props;
   const classes = useStyles();
-  // const { topicList } = props;
-  const topicList = ['A', 'B', 'C'];
+  // const topicList = ['A', 'B', 'C'];
+  console.log(topics)
   return (
     <Grid container className={classes.forumContainer}>
       <Grid item xs={12}>
@@ -30,10 +33,10 @@ function ForumLayout() {
       <Grid item xs={12} lg={3} className={classes.list}>
         <ul className={classes.topics}>
           {
-            topicList.map((item, ind) => (
+            topics.map((item, ind) => (
               <ul className={classes.topics}>
                 <Typography variation="caption" display="block" gutterBottom>
-                  {ind + 1}. {item}
+                  {ind + 1}. {item.topic}
                 </Typography>
               </ul>
             ))
@@ -43,5 +46,9 @@ function ForumLayout() {
     </Grid>
   );
 }
+
+ForumLayout.propTypes = {
+  topics: PropTypes.instanceOf(Object).isRequired,
+};
 
 export default ForumLayout;
