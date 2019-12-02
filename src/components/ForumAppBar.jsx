@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   AppBar, Tabs, Tab, Grid,
 } from '@material-ui/core';
@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 import { DEFAULT_PAGE, PAGE_INDEX } from '../constants';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   forumContainer: {
     maxWidth: '70%',
     marginLeft: 'auto',
