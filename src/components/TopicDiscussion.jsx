@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 function TopicDiscussion(props) {
   const {
-    title, content, comments, topicId, subject,
+    title, content, comments, topicId, subject, updateComments,
   } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -46,7 +46,10 @@ function TopicDiscussion(props) {
   const handleSubmit = () => {
     async function storeComment() {
       const resp = await storeNewComment(topicId, subject, [...comments, { name: 'lenin', msg: 'Yes.It is the future' }]);
-      setAddComment(false);
+      if (resp.status === 200) {
+        setAddComment(false);
+        updateComments();
+      }
     }
     storeComment();
   };
@@ -143,6 +146,7 @@ TopicDiscussion.propTypes = {
     name: PropTypes.string.isRequired,
     msg: PropTypes.string.isRequired,
   })).isRequired,
+  updateComments: PropTypes.string.isRequired,
 };
 
 export default TopicDiscussion;

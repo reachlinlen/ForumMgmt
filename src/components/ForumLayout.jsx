@@ -22,6 +22,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       paddingInlineStart: '0',
     },
+    '&: hover': {
+      color: Color.blue,
+      textDecoration: 'underline',
+    },
   },
   list: {
     [theme.breakpoints.up('lg')]: {
@@ -43,6 +47,11 @@ function ForumLayout(props) {
 
   const showTopicContent = (topicId) => {
     setSelTopic(topicId);
+  };
+
+  const updateCommentsSection = () => {
+    console.log('@updateCommentsSection')
+    setSelTopic(selTopic);
   };
 
   useEffect(() => {
@@ -87,6 +96,7 @@ function ForumLayout(props) {
               comments={topicContent.comments}
               topicId={topicContent.topic_id}
               subject={subject}
+              updateComments={updateCommentsSection}
             />
           )
         }
