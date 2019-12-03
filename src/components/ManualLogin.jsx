@@ -74,9 +74,10 @@ function ManualLogin() {
       const authenticated = await authenticate(username, password, recToken);
       if (!get(authenticated, 'error', false)) {
         //TODO
-        console.log(authenticated)
+        console.log(authenticated);
       }
     }
+    checkLogin();
   };
 
   const handleRegister = (e) => {
