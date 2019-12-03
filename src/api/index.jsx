@@ -5,12 +5,12 @@ import { URL } from '../constants';
 
 const HEADERS = {
   'Content-Type': 'application/json',
-  'crossDomain': true,
+  crossDomain: true,
   // 'Authorization': 'JWT',
   'Content-Security-Policy': `default-src 'none'; script-src 'self';
                               connect-src 'self';img-src 'self';style-src 'self';`,
   'X-Content-Type-Options': 'nosniff',
-  'Pragma': 'no-cache',
+  Pragma: 'no-cache',
 };
 
 export const getTopics = async (subject) => {
@@ -37,5 +37,5 @@ export const authenticate = async (id, password) => {
 export const addNewUser = async (id, password) => {
   const login = { id: id, password: password };
   const resp = await axios.post(`${URL}/register`, { body: login });
-  return resp;
+  return get(resp, 'data.error', resp.data);
 };

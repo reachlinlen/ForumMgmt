@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Formik, Form, useField } from 'formik';
 import {
@@ -48,8 +49,8 @@ const LoginTextField = ({ ...props }) => {
   return (
     <TextField
       label={name}
-      { ...field }
-      { ...props }
+      {...field}
+      {...props}
       helperText={infoText}
       error={meta.error && meta.touched}
     />
@@ -65,16 +66,16 @@ function ManualLogin() {
   const classes = useStyles();
   const handleSubmit = (username, password) => {
     let recToken = '';
-    grecaptcha.ready(function() {
-      grecaptcha.execute('6LemdMUUAAAAAL6YanSVVocTS4bAotgl_IuqLGwr', {action: 'homepage'}).then(function(token) {
-        recToken = token;
-      });
+    grecaptcha.ready(() => {
+      grecaptcha.execute('6LemdMUUAAAAAL6YanSVVocTS4bAotgl_IuqLGwr', { action: 'homepage' })
+        .then((token) => {
+          recToken = token;
+        });
     });
     async function checkLogin() {
       const authenticated = await authenticate(username, password, recToken);
       if (!get(authenticated, 'error', false)) {
         //TODO
-        console.log(authenticated);
       }
     }
     checkLogin();
@@ -85,6 +86,9 @@ function ManualLogin() {
     async function newUser() {
       const resp = await addNewUser(e.currentTarget.form[0].value, e.currentTarget.form[1].value);
       e.stopPropagation();
+      if (!get(resp, 'data.error', false)) {
+        //TODO
+      }
     }
     newUser();
   };

@@ -22,9 +22,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       paddingInlineStart: '0',
     },
-    '&: hover': {
+    '&:hover': {
       color: Color.blue,
       textDecoration: 'underline',
+      cursor: 'grab',
     },
   },
   list: {
@@ -70,18 +71,20 @@ function ForumLayout(props) {
         <Typography variant="h4" gutterBottom>Topics</Typography>
       </Grid>
       <Grid item xs={12} lg={3} className={classes.list}>
-        <ul className={classes.topics}>
+        <ul>
           {
             topics.map((item, ind) => (
-              <ul
-                className={classes.topics}
-                key={item.topic_id}
-                onClick={e => showTopicContent(item.topic_id)}
-              >
-                <Typography variation="caption" display="block" gutterBottom>
-                  {ind + 1}. {item.topic}
-                </Typography>
-              </ul>
+              <Grid item xs={12}>
+                <ul
+                  className={classes.topics}
+                  key={item.topic_id}
+                  onClick={() => showTopicContent(item.topic_id)}
+                >
+                  <Typography variation="caption" display="block" gutterBottom>
+                    `${ind + 1}. ${item.topic}`
+                  </Typography>
+                </ul>
+              </Grid>
             ))
           }
         </ul>
