@@ -17,6 +17,10 @@ export const HELPER_TEXT = {
 export const URL = 'http://localhost:8081';
 
 export const LOGIN_FORM_INIT_VALUE = {
-  userName: '',
+  username: '',
   password: '',
 };
+
+export const LOGIN = 'Login';
+
+export const REGISTER = 'Register';

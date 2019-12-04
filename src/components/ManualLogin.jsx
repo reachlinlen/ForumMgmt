@@ -10,7 +10,9 @@ import * as Yup from 'yup';
 import { get } from 'lodash';
 import { connect } from 'react-redux';
 
-import { LOGIN_FORM_INIT_VALUE, HELPER_TEXT } from '../constants';
+import {
+  LOGIN_FORM_INIT_VALUE, HELPER_TEXT, LOGIN, REGISTER,
+} from '../constants';
 import { authenticate, addNewUser } from '../api';
 
 const {
@@ -50,9 +52,10 @@ const useStyles = makeStyles((theme) => ({
 const LoginTextField = ({ ...props }) => {
   const { name, helperText } = props;
   const [field, meta] = useField(props);
+  const uppercaseLabel = name[0].toUpperCase() + name.slice(1);
   return (
     <TextField
-      label={name}
+      label={uppercaseLabel}
       {...field}
       {...props}
       helperText={helperText}
@@ -150,10 +153,10 @@ function ManualLogin(props) {
             />
           </Grid>
           <Grid item xs={6}>
-            <Button type="submit" variant="contained" fullWidth color="primary">Login</Button>
+            <Button type="submit" variant="contained" fullWidth color="primary">{LOGIN}</Button>
           </Grid>
           <Grid item xs={6}>
-            <Button type="submit" variant="contained" fullWidth color="primary" onClick={handleRegister}>Register</Button>
+            <Button type="submit" variant="contained" fullWidth color="primary" onClick={handleRegister}>{REGISTER}</Button>
           </Grid>
         </Grid>
       </Form>
