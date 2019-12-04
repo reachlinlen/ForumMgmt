@@ -10,6 +10,8 @@ export const PAGE_INDEX = {
 export const HELPER_TEXT = {
   USERNAME: 'A Valid email address',
   PASSWORD: 'Minimum 8 characers with atleast one Uppercase one Lowercase one Special character & one Number',
+  LOGIN_ERROR: 'Username or Password is incorrect',
+  NETWORK_ERROR: 'Network Error. Please try again after sometime.',
 };
 
 export const URL = 'http://localhost:8081';

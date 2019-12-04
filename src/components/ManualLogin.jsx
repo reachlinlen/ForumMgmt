@@ -1,8 +1,9 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, useField } from 'formik';
 import {
-  Grid, TextField, makeStyles, Button,
+  Grid, TextField, makeStyles, Button, Typography,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
@@ -12,7 +13,9 @@ import { connect } from 'react-redux';
 import { LOGIN_FORM_INIT_VALUE, HELPER_TEXT } from '../constants';
 import { authenticate, addNewUser } from '../api';
 
-const { USERNAME, PASSWORD } = HELPER_TEXT;
+const {
+  USERNAME, PASSWORD, LOGIN_ERROR, NETWORK_ERROR,
+} = HELPER_TEXT;
 
 const useStyles = makeStyles((theme) => ({
   hostLogin: {
@@ -33,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
         width: '30%',
       },
     },
+  },
+  error: {
+    height: '10vh',
   },
   loginText: {
     [theme.breakpoints.up('lg')]: {
@@ -66,6 +72,8 @@ LoginTextField.propTypes = {
 function ManualLogin(props) {
   const { updateAuthenticate } = props;
   const classes = useStyles();
+  const [loginError, setLoginError] = useState('');
+
   const handleSubmit = (username, password) => {
     //TODO Rectify the issue
     // grecaptcha.ready(() => {
@@ -73,11 +81,23 @@ function ManualLogin(props) {
     //     .then((token) => token);
     // });
     async function checkLogin() {
-      const authenticated = await authenticate(username, password);
-      if (!get(authenticated, 'data.error', false) && get(authenticated, 'data', false)) {
-        updateAuthenticate(true);
-      } else {
-
+      // const authenticated = await authenticate(username, password);
+      // if (!get(authenticated, 'data.error', false) && get(authenticated, 'data', false)) {
+      //   updateAuthenticate(true);
+      //   loginError ? setLoginError('') : null;
+      // } else {
+      //   setLoginError(LOGIN_ERROR);
+      // }
+      try {
+        const authenticated = await authenticate(username, password);
+        if (!get(authenticated, 'data.error', false) && get(authenticated, 'data', false)) {
+          updateAuthenticate(true);
+          loginError ? setLoginError('') : null;
+        } else {
+          setLoginError(LOGIN_ERROR);
+        }
+      } catch (e) {
+        setLoginError(NETWORK_ERROR);
       }
     }
     checkLogin();
@@ -119,6 +139,14 @@ function ManualLogin(props) {
     >
       <Form>
         <Grid container spacing={2} className={classes.hostLogin}>
+          <Grid item xs={12} className={classes.error}>
+            { loginError
+            && (
+              <Typography variant="overline" display="block" color="error">
+                {loginError}
+              </Typography>
+            )}
+          </Grid>
           <Grid item xs={12} className={classes.loginText}>
             <LoginTextField
               id="username"
