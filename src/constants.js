@@ -3,6 +3,8 @@ export const DEFAULT_PAGE = 0;
 export const PAGE_INDEX = {
   0: 'forums',
   1: 'science',
+  2: 'technology',
+  3: 'sports',
 };
 
 export const HELPER_TEXT = {
