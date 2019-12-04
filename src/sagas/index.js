@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
 
-function* authentication(action) {
-  yield put({ type: 'AUTHENTICATION', data: action.payload });
+function authentication(dispatch, action) {
+  dispatch({ type: 'AUTHENTICATION', auth: action.payload });
 }
 
 export default function* rootSaga() {

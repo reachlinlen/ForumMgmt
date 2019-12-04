@@ -24,13 +24,18 @@ function App(props) {
           </Switch>
         )
       }
-      <Switch>
-        <Route path="/" exact component={Login} />
-        <Route path="/forums" exact component={Forums} />
-        <Route path="/science" exact component={Science} />
-        <Route path="/technology" exact component={Technology} />
-        <Route path="/sports" exact component={Sports} />
-      </Switch>
+      {
+        (isLogin || isAuthenticated)
+        && (
+          <Switch>
+            <Route path="/" exact component={Login} />
+            <Route path="/forums" exact component={Forums} />
+            <Route path="/science" exact component={Science} />
+            <Route path="/technology" exact component={Technology} />
+            <Route path="/sports" exact component={Sports} />
+          </Switch>
+        )
+      }
     </>
   );
 }

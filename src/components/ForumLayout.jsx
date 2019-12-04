@@ -18,6 +18,11 @@ const useStyles = makeStyles((theme) => ({
       paddingLeft: '1vw',
     },
   },
+  allTopics: {
+    [theme.breakpoints.up('lg')]: {
+      paddingInlineStart: '0',
+    },
+  },
   topics: {
     [theme.breakpoints.up('lg')]: {
       paddingInlineStart: '0',
@@ -71,7 +76,7 @@ function ForumLayout(props) {
         <Typography variant="h4" gutterBottom>Topics</Typography>
       </Grid>
       <Grid item xs={12} lg={3} className={classes.list}>
-        <ul>
+        <ul className={classes.allTopics}>
           {
             topics.map((item, ind) => (
               <Grid item xs={12}>
@@ -81,7 +86,7 @@ function ForumLayout(props) {
                   onClick={() => showTopicContent(item.topic_id)}
                 >
                   <Typography variation="caption" display="block" gutterBottom>
-                    `${ind + 1}. ${item.topic}`
+                    {ind + 1}. {item.topic}
                   </Typography>
                 </ul>
               </Grid>

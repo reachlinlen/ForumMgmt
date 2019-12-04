@@ -1,7 +1,7 @@
-const reducer = (state = { data: [] }, action) => {
+const reducer = (state = { auth: false }, action) => {
   switch (action.type) {
     case 'AUTHENTICATION': {
-      return Object.assign(...state.data, { auth: action.data });
+      return Object.assign({}, state, { auth: action.payload });
     }
     default:
       return state;
