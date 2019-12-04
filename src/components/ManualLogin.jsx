@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Form, useField } from 'formik';
 import {
-  Grid, TextField, makeStyles, Button, Typography,
+  Grid, TextField, makeStyles, Button,
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
