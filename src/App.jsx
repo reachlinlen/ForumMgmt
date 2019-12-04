@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -11,24 +11,23 @@ import Sports from './pages/Sports';
 import ForumAppBar from './components/ForumAppBar';
 
 function App(props) {
-  const { location, auth } = props;
-  const isLogin = location.pathname === '/';
+  const { auth } = props;
   const isAuthenticated = auth;
   return (
     <>
-      { !isLogin && isAuthenticated && <ForumAppBar />}
+      { isAuthenticated && <ForumAppBar />}
       {
-        !isLogin && !isAuthenticated && (
+        !isAuthenticated && (
           <Switch>
             <Route component={Login} />
           </Switch>
         )
       }
       {
-        (isLogin || isAuthenticated)
+        isAuthenticated
         && (
           <Switch>
-            <Route path="/" exact component={Login} />
+            <Route path="/" exact component={Forums} />
             <Route path="/forums" exact component={Forums} />
             <Route path="/science" exact component={Science} />
             <Route path="/technology" exact component={Technology} />
@@ -41,7 +40,6 @@ function App(props) {
 }
 
 App.propTypes = {
-  location: PropTypes.instanceOf(Object).isRequired,
   auth: PropTypes.bool.isRequired,
 };
 
@@ -53,4 +51,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-)((withRouter)(App));
+)((App));
