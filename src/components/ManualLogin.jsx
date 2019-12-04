@@ -87,7 +87,7 @@ function ManualLogin(props) {
       const resp = await addNewUser(e.currentTarget.form[0].value, e.currentTarget.form[1].value);
       e.stopPropagation();
       if (!get(resp, 'data.error', false) && get(resp, 'data.inserted', false)) {
-        //TODO 
+        updateAuthenticate(true);
       }
     }
     newUser();
