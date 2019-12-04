@@ -7,9 +7,11 @@ import {
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { get } from 'lodash';
+import { connect } from 'react-redux';
 
 import { LOGIN_FORM_INIT_VALUE, HELPER_TEXT } from '../constants';
 import { authenticate, addNewUser } from '../api';
+import { rootSaga } from '../sagas';
 
 const { USERNAME, PASSWORD } = HELPER_TEXT;
 
@@ -62,20 +64,19 @@ LoginTextField.propTypes = {
   infoText: PropTypes.string.isRequired,
 };
 
-function ManualLogin() {
+function ManualLogin(props) {
+  const { updateAuthenticate } = props;
   const classes = useStyles();
   const handleSubmit = (username, password) => {
-    let recToken = '';
-    grecaptcha.ready(() => {
-      grecaptcha.execute('6LemdMUUAAAAAL6YanSVVocTS4bAotgl_IuqLGwr', { action: 'homepage' })
-        .then((token) => {
-          recToken = token;
-        });
-    });
+    //TODO Rectify the issue
+    // grecaptcha.ready(() => {
+    //   grecaptcha.execute('6Lfm58UUAAAAAEY0uzJO5C1cJBSYlc65deow8fUN', { action: 'login' })
+    //     .then((token) => token);
+    // });
     async function checkLogin() {
-      const authenticated = await authenticate(username, password, recToken);
+      const authenticated = await authenticate(username, password);
       if (!get(authenticated, 'error', false)) {
-        //TODO
+        updateAuthenticate(true);
       }
     }
     checkLogin();
@@ -132,7 +133,7 @@ function ManualLogin() {
           <Grid item xs={12}>
             <div
               className="g-recaptcha"
-              data-sitekey="6LemdMUUAAAAAL6YanSVVocTS4bAotgl_IuqLGwr"
+              data-sitekey="6Lfm58UUAAAAAEY0uzJO5C1cJBSYlc65deow8fUN"
             />
           </Grid>
           <Grid item xs={6}>
@@ -148,6 +149,16 @@ function ManualLogin() {
 }
 
 ManualLogin.propTypes = {
+  updateAuthenticate: PropTypes.func.isRequired,
 };
 
-export default ManualLogin;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateAuthenticate: (data) => dispatch({ type: 'AUTHENTICATION', payload: data }),
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(ManualLogin);
