@@ -76,6 +76,8 @@ function ManualLogin(props) {
       const authenticated = await authenticate(username, password);
       if (!get(authenticated, 'data.error', false) && get(authenticated, 'data', false)) {
         updateAuthenticate(true);
+      } else {
+
       }
     }
     checkLogin();
@@ -104,7 +106,10 @@ function ManualLogin(props) {
           password: Yup.string()
             .min(8)
             .max(25)
-            .matches(/[a-zA-Z0-9*$#._]/)
+            .matches(/[a-z]/)
+            .matches(/[A-Z]/)
+            .matches(/[0-9]/)
+            .matches(/[@$#_]/)
             .required('Required'),
         })
       }
