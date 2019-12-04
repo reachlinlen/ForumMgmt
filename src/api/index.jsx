@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { get } from 'lodash';
 
 import { URL } from '../constants';
 
@@ -25,7 +24,7 @@ export const getTopicContent = async (subject, topicId) => {
 
 export const storeNewComment = async (topicId, subject, comments) => {
   const resp = await axios.post(`${URL}/addcomment?topicId=${topicId}&&subject=${subject}`, { body: comments });
-  return get(resp, 'data.error', 'data.inserted');
+  return resp;
 };
 
 export const authenticate = async (id, password) => {

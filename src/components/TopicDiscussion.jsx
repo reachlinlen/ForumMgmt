@@ -5,6 +5,8 @@ import {
 } from '@material-ui/core';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import { get } from 'lodash';
+
 import CommentIcon from '@material-ui/icons/Comment';
 import { storeNewComment } from '../api';
 
@@ -36,19 +38,20 @@ const useStyles = makeStyles((theme) => ({
 
 function TopicDiscussion(props) {
   const {
-    title, content, comments, topicId, subject, updateComments,
+    title, content, comments, topicId, subject, updateComments, totalComments,
   } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [addComment, setAddComment] = useState(false);
+  const [newComment, setNewComment] = useState('');
 
   const handleComment = () => setAddComment(true);
   const handleSubmit = () => {
     async function storeComment() {
-      const resp = await storeNewComment(topicId, subject, [...comments, { name: 'lenin', msg: 'Yes.It is the future' }]);
-      if (resp.status === 200) {
+      const resp = await storeNewComment(topicId, subject, [...comments, { name: 'lenin', msg: newComment }]);
+      if (!get(resp, 'data.error', false) && get(resp, 'data.updated', false)) {
         setAddComment(false);
-        updateComments();
+        updateComments(totalComments + 1);
       }
     }
     storeComment();
@@ -115,6 +118,7 @@ function TopicDiscussion(props) {
                       label="Lenin comments...."
                       variant="outlined"
                       id="mui-theme-provider-outlined-input"
+                      onChange={(e) => setNewComment(e.target.value)}
                     />
                   </ThemeProvider>
                 </Grid>
@@ -146,7 +150,8 @@ TopicDiscussion.propTypes = {
     name: PropTypes.string.isRequired,
     msg: PropTypes.string.isRequired,
   })).isRequired,
-  updateComments: PropTypes.string.isRequired,
+  updateComments: PropTypes.func.isRequired,
+  totalComments: PropTypes.number.isRequired,
 };
 
 export default TopicDiscussion;

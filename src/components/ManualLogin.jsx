@@ -11,7 +11,6 @@ import { connect } from 'react-redux';
 
 import { LOGIN_FORM_INIT_VALUE, HELPER_TEXT } from '../constants';
 import { authenticate, addNewUser } from '../api';
-import { rootSaga } from '../sagas';
 
 const { USERNAME, PASSWORD } = HELPER_TEXT;
 
@@ -46,14 +45,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LoginTextField = ({ ...props }) => {
-  const { name, infoText } = props;
+  const { name, helperText } = props;
   const [field, meta] = useField(props);
   return (
     <TextField
       label={name}
       {...field}
       {...props}
-      helperText={infoText}
+      helperText={helperText}
       error={meta.error && meta.touched}
     />
   );
@@ -61,7 +60,7 @@ const LoginTextField = ({ ...props }) => {
 
 LoginTextField.propTypes = {
   name: PropTypes.string.isRequired,
-  infoText: PropTypes.string.isRequired,
+  helperText: PropTypes.string.isRequired,
 };
 
 function ManualLogin(props) {
@@ -119,7 +118,7 @@ function ManualLogin(props) {
             <LoginTextField
               id="username"
               name="username"
-              infoText={USERNAME}
+              helperText={USERNAME}
             />
           </Grid>
           <Grid item xs={12} className={classes.loginText}>
@@ -127,7 +126,7 @@ function ManualLogin(props) {
               type="password"
               id="password"
               name="password"
-              infoText={PASSWORD}
+              helperText={PASSWORD}
             />
           </Grid>
           <Grid item xs={12}>

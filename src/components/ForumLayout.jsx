@@ -50,14 +50,13 @@ function ForumLayout(props) {
   const classes = useStyles();
   const [selTopic, setSelTopic] = useState(get(topics[0], 'topic_id', ''));
   const [topicContent, setTopicContent] = useState('');
-
+  const [totalComments, setTotalComments] = useState(0);
   const showTopicContent = (topicId) => {
     setSelTopic(topicId);
   };
 
-  const updateCommentsSection = () => {
-    console.log('@updateCommentsSection')
-    setSelTopic(selTopic);
+  const updateCommentsSection = (updatedCommentNum) => {
+    setTotalComments(updatedCommentNum);
   };
 
   useEffect(() => {
@@ -65,10 +64,11 @@ function ForumLayout(props) {
       const resp = await getTopicContent(subject, selTopic);
       if (resp) {
         setTopicContent(resp[0]);
+        setTotalComments(resp[0].comments.length);
       }
     }
     fetchTopicContent();
-  }, [topics, selTopic]);
+  }, [topics, selTopic, totalComments]);
 
   return (
     <Grid container className={classes.forumContainer}>
@@ -105,6 +105,7 @@ function ForumLayout(props) {
               topicId={topicContent.topic_id}
               subject={subject}
               updateComments={updateCommentsSection}
+              totalComments={totalComments}
             />
           )
         }
