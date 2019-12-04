@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Grid, Button, Typography, Hidden, Icon,
 } from '@material-ui/core';
@@ -36,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(3),
   },
+  error: {
+    height: '10vh',
+    paddingLeft: '2vw',
+  },
   socialMediaLogin: {
     [theme.breakpoints.down('md')]: {
       paddingLeft: theme.spacing(3),
@@ -64,6 +68,13 @@ const useStyles = makeStyles((theme) => ({
 
 function Home() {
   const classes = useStyles();
+  const [loginError, setLoginError] = useState('');
+
+  const handleLoginError = (error) => {
+    if (loginError !== error) {
+      setLoginError(error);
+    }
+  };
 
   return (
     <>
@@ -73,10 +84,18 @@ function Home() {
         </Grid>
         <Grid item xs={12} lg={9}>
           <Grid container className={classes.loginContainer}>
-            <Grid item xs={12}>
+            <Grid item xs={12} lg={6}>
               <Typography variant="h4" className={classes.login}>
                 Login
               </Typography>
+            </Grid>
+            <Grid item xs={12} lg={6} className={classes.error}>
+              { loginError
+                && (
+                  <Typography variant="overline" display="block" color="error">
+                    {loginError}
+                  </Typography>
+                )}
             </Grid>
             <Grid item xs={12} lg={5} className={classes.socialMediaLogin}>
               <Button variant="contained" color="primary" href="www.google.com" startIcon={<Icon><img src={google} alt="googleLogo" /></Icon>}>
@@ -98,7 +117,7 @@ function Home() {
               </Grid>
             </Hidden>
             <Grid item xs={12} lg={6}>
-              <ManualLogin />
+              <ManualLogin handleLoginError={handleLoginError} />
             </Grid>
           </Grid>
         </Grid>

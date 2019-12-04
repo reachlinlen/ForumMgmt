@@ -37,9 +37,6 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  error: {
-    height: '10vh',
-  },
   loginText: {
     [theme.breakpoints.up('lg')]: {
       height: '12vh',
@@ -70,9 +67,8 @@ LoginTextField.propTypes = {
 };
 
 function ManualLogin(props) {
-  const { updateAuthenticate } = props;
+  const { handleLoginError, updateAuthenticate } = props;
   const classes = useStyles();
-  const [loginError, setLoginError] = useState('');
 
   const handleSubmit = (username, password) => {
     //TODO Rectify the issue
@@ -81,23 +77,16 @@ function ManualLogin(props) {
     //     .then((token) => token);
     // });
     async function checkLogin() {
-      // const authenticated = await authenticate(username, password);
-      // if (!get(authenticated, 'data.error', false) && get(authenticated, 'data', false)) {
-      //   updateAuthenticate(true);
-      //   loginError ? setLoginError('') : null;
-      // } else {
-      //   setLoginError(LOGIN_ERROR);
-      // }
       try {
         const authenticated = await authenticate(username, password);
         if (!get(authenticated, 'data.error', false) && get(authenticated, 'data', false)) {
           updateAuthenticate(true);
-          loginError ? setLoginError('') : null;
+          handleLoginError('');
         } else {
-          setLoginError(LOGIN_ERROR);
+          handleLoginError(LOGIN_ERROR);
         }
       } catch (e) {
-        setLoginError(NETWORK_ERROR);
+        handleLoginError(NETWORK_ERROR);
       }
     }
     checkLogin();
@@ -139,14 +128,6 @@ function ManualLogin(props) {
     >
       <Form>
         <Grid container spacing={2} className={classes.hostLogin}>
-          <Grid item xs={12} className={classes.error}>
-            { loginError
-            && (
-              <Typography variant="overline" display="block" color="error">
-                {loginError}
-              </Typography>
-            )}
-          </Grid>
           <Grid item xs={12} className={classes.loginText}>
             <LoginTextField
               id="username"
@@ -181,6 +162,7 @@ function ManualLogin(props) {
 }
 
 ManualLogin.propTypes = {
+  handleLoginError: PropTypes.func.isRequired,
   updateAuthenticate: PropTypes.func.isRequired,
 };
 
