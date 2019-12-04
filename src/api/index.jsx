@@ -24,18 +24,18 @@ export const getTopicContent = async (subject, topicId) => {
 };
 
 export const storeNewComment = async (topicId, subject, comments) => {
-  const resp = await axios.put(`${URL}/addcomment?topicId=${topicId}&&subject=${subject}`, { body: comments });
-  return resp;
+  const resp = await axios.post(`${URL}/addcomment?topicId=${topicId}&&subject=${subject}`, { body: comments });
+  return get(resp, 'data.error', 'data.inserted');
 };
 
 export const authenticate = async (id, password) => {
   const login = { id: id, password: password };
   const resp = await axios.post(`${URL}/authenticate`, { body: login });
-  return get(resp, 'data.error', resp.data);
+  return resp;
 };
 
 export const addNewUser = async (id, password) => {
   const login = { id: id, password: password };
   const resp = await axios.post(`${URL}/register`, { body: login });
-  return get(resp, 'data.error', resp.data);
+  return resp;
 };

@@ -75,7 +75,7 @@ function ManualLogin(props) {
     // });
     async function checkLogin() {
       const authenticated = await authenticate(username, password);
-      if (!get(authenticated, 'error', false)) {
+      if (!get(authenticated, 'data.error', false) && get(authenticated, 'data', false)) {
         updateAuthenticate(true);
       }
     }
@@ -87,8 +87,8 @@ function ManualLogin(props) {
     async function newUser() {
       const resp = await addNewUser(e.currentTarget.form[0].value, e.currentTarget.form[1].value);
       e.stopPropagation();
-      if (!get(resp, 'data.error', false)) {
-        //TODO
+      if (!get(resp, 'data.error', false) && get(resp, 'data.inserted', false)) {
+        //TODO 
       }
     }
     newUser();
