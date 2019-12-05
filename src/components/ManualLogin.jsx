@@ -169,11 +169,9 @@ ManualLogin.propTypes = {
   updateAuthenticate: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateAuthenticate: (data) => dispatch({ type: 'AUTHENTICATION', payload: data }),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  updateAuthenticate: (data) => dispatch({ type: 'AUTHENTICATION', payload: data }),
+});
 
 export default connect(
   null,
