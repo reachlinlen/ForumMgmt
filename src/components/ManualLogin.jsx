@@ -153,7 +153,7 @@ function ManualLogin(props) {
             />
           </Grid>
           <Grid item xs={6}>
-            <Button type="submit" variant="contained" fullWidth color="primary">{LOGIN}</Button>
+            <Button type="submit" variant="contained" fullWidth color="primary" data-testid="loginBtn">{LOGIN}</Button>
           </Grid>
           <Grid item xs={6}>
             <Button type="submit" variant="contained" fullWidth color="primary" onClick={handleRegister}>{REGISTER}</Button>
